@@ -1,6 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/content', '@nuxt/image'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/ui',
+    '@nuxt/content',
+    '@nuxt/image',
+    'motion-v/nuxt',
+    '@vueuse/nuxt'
+  ],
 
   devtools: {
     enabled: true
