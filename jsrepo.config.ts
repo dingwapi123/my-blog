@@ -1,10 +1,10 @@
-import { defineConfig } from 'jsrepo';
+import { defineConfig } from 'jsrepo'
 
 export default defineConfig({
-    // configure where stuff comes from here
-    registries: [],
-    // configure were stuff goes here
-    paths: {
-		component: './app/components'
-	},
-});
+  // configure where stuff comes from here
+  registries: [],
+  // configure were stuff goes here
+  paths: {
+    component: './app/components'
+  }
+})
