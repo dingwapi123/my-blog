@@ -2,17 +2,140 @@
 @import "@nuxt/ui";
 
 @theme static {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: "Public Sans", sans-serif;
 
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
+  --color-green-50: #effdf5;
+  --color-green-100: #d9fbe8;
+  --color-green-200: #b3f5d1;
+  --color-green-300: #75edae;
+  --color-green-400: #00dc82;
+  --color-green-500: #00c16a;
+  --color-green-600: #00a155;
+  --color-green-700: #007f45;
   --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
+  --color-green-900: #0a5331;
+  --color-green-950: #052e16;
+}
+
+:root {
+  --theme-bg: #fbfaf7;
+  --theme-bg-soft: #f4f1ea;
+  --theme-surface: #ffffff;
+  --theme-surface-muted: #f6f4ef;
+  --theme-text: #1f1f1d;
+  --theme-text-muted: #61615d;
+  --theme-border: #ddd6ca;
+  --theme-border-strong: #cfc6b8;
+  --theme-accent: #0f8a5f;
+  --theme-accent-soft: #d8f2e7;
+  --theme-link: #0f7a84;
+  --theme-code-bg: #f2efe8;
+  --theme-code-border: #d8d1c4;
+  --theme-code-text: #2f302d;
+  --theme-selection: #b7e8d4;
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+  --theme-bg: #121314;
+  --theme-bg-soft: #17191b;
+  --theme-surface: #1a1d20;
+  --theme-surface-muted: #202428;
+  --theme-text: #ece9e2;
+  --theme-text-muted: #b1aea8;
+  --theme-border: #34393e;
+  --theme-border-strong: #464c52;
+  --theme-accent: #45c597;
+  --theme-accent-soft: #103b2e;
+  --theme-link: #58c8d8;
+  --theme-code-bg: #191d21;
+  --theme-code-border: #30363d;
+  --theme-code-text: #dfdfdb;
+  --theme-selection: #1f6f55;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  color: var(--theme-text);
+  background:
+    radial-gradient(circle at 15% -10%, color-mix(in oklab, var(--theme-accent) 14%, transparent), transparent 45%),
+    radial-gradient(circle at 95% 0%, color-mix(in oklab, var(--theme-link) 10%, transparent), transparent 40%),
+    var(--theme-bg);
+  line-height: 1.7;
+  letter-spacing: 0.005em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+* {
+  border-color: var(--theme-border);
+}
+
+::selection {
+  background: var(--theme-selection);
+}
+
+a {
+  color: var(--theme-link);
+  text-decoration-color: color-mix(in oklab, var(--theme-link) 35%, transparent);
+  text-underline-offset: 0.18em;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+a:hover {
+  color: var(--theme-accent);
+  text-decoration-color: color-mix(in oklab, var(--theme-accent) 50%, transparent);
+}
+
+.prose {
+  color: var(--theme-text);
+}
+
+.prose :where(h1, h2, h3, h4, strong) {
+  color: var(--theme-text);
+}
+
+.prose :where(p, li, figcaption, blockquote) {
+  color: var(--theme-text-muted);
+}
+
+.prose :where(a) {
+  color: var(--theme-link);
+}
+
+.prose :where(hr) {
+  border-color: var(--theme-border);
+}
+
+.prose :where(blockquote) {
+  border-left-color: var(--theme-accent);
+  background: color-mix(in oklab, var(--theme-accent-soft) 40%, transparent);
+  color: var(--theme-text);
+}
+
+.prose :where(code):not(:where(pre code)) {
+  border: 1px solid var(--theme-code-border);
+  background: var(--theme-code-bg);
+  color: var(--theme-code-text);
+  border-radius: 0.4rem;
+  padding: 0.12rem 0.36rem;
+}
+
+.prose :where(pre) {
+  border: 1px solid var(--theme-code-border);
+  background: var(--theme-code-bg);
+  border-radius: 0.85rem;
+}
+
+.prose :where(pre code) {
+  color: var(--theme-code-text);
 }

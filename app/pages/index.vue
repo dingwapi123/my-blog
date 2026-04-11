@@ -1,76 +1,76 @@
+<script setup lang="ts">
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat('zh-CN', { dateStyle: 'long' }).format(new Date(value))
+
+const toBlogPath = (path: string) => `/blog/${path.split('/').filter(Boolean).at(-1)}`
+
+const { data: posts } = await useAsyncData('home-latest-posts', async () => {
+  const items = await queryCollection('posts')
+    .where('draft', '=', false)
+    .order('date', 'DESC')
+    .all()
+
+  return items.slice(0, 3)
+})
+</script>
+
 <template>
-  <div>
+  <UContainer class="py-10 sm:py-16">
     <UPageHero
-      title="Nuxt Starter Template"
-      description="A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours."
-      :links="[{
-        label: 'Get started',
-        to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
-        target: '_blank',
-        trailingIcon: 'i-lucide-arrow-right',
-        size: 'xl'
-      }, {
-        label: 'Use this template',
-        to: 'https://github.com/nuxt-ui-templates/starter',
-        target: '_blank',
-        icon: 'i-simple-icons-github',
-        size: 'xl',
-        color: 'neutral',
-        variant: 'subtle'
-      }]"
+      title="陈心智的个人博客"
+      description="记录前端开发、Nuxt 实战和生活思考。持续更新，慢慢打磨。"
+      :links="[
+        {
+          label: '浏览全部文章',
+          to: '/blog',
+          trailingIcon: 'i-lucide-arrow-right'
+        },
+        {
+          label: '了解我',
+          to: '/about',
+          color: 'neutral',
+          variant: 'subtle'
+        }
+      ]"
     />
 
     <UPageSection
-      id="features"
-      title="Everything you need to build modern Nuxt apps"
-      description="Start with a solid foundation. This template includes all the essentials for building production-ready applications with Nuxt UI's powerful component system."
-      :features="[{
-        icon: 'i-lucide-rocket',
-        title: 'Production-ready from day one',
-        description: 'Pre-configured with TypeScript, ESLint, Tailwind CSS, and all the best practices. Focus on building features, not setting up tooling.'
-      }, {
-        icon: 'i-lucide-palette',
-        title: 'Beautiful by default',
-        description: 'Leveraging Nuxt UI\'s design system with automatic dark mode, consistent spacing, and polished components that look great out of the box.'
-      }, {
-        icon: 'i-lucide-zap',
-        title: 'Lightning fast',
-        description: 'Optimized for performance with SSR/SSG support, automatic code splitting, and edge-ready deployment. Your users will love the speed.'
-      }, {
-        icon: 'i-lucide-blocks',
-        title: '100+ components included',
-        description: 'Access Nuxt UI\'s comprehensive component library. From forms to navigation, everything is accessible, responsive, and customizable.'
-      }, {
-        icon: 'i-lucide-code-2',
-        title: 'Developer experience first',
-        description: 'Auto-imports, hot module replacement, and TypeScript support. Write less boilerplate and ship more features.'
-      }, {
-        icon: 'i-lucide-shield-check',
-        title: 'Built for scale',
-        description: 'Enterprise-ready architecture with proper error handling, SEO optimization, and security best practices built-in.'
-      }]"
-    />
-
-    <UPageSection>
-      <UPageCTA
-        title="Ready to build your next Nuxt app?"
-        description="Join thousands of developers building with Nuxt and Nuxt UI. Get this template and start shipping today."
-        variant="subtle"
-        :links="[{
-          label: 'Start building',
-          to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
-          target: '_blank',
-          trailingIcon: 'i-lucide-arrow-right',
-          color: 'neutral'
-        }, {
-          label: 'View on GitHub',
-          to: 'https://github.com/nuxt-ui-templates/starter',
-          target: '_blank',
-          icon: 'i-simple-icons-github',
-          color: 'neutral',
-          variant: 'outline'
-        }]"
-      />
+      title="最新文章"
+      description="从最近发布的文章开始阅读。"
+    >
+      <div class="grid gap-4">
+        <UCard
+          v-for="post in posts || []"
+          :key="post.id"
+        >
+          <div class="space-y-3">
+            <p class="text-sm text-muted">
+              {{ formatDate(post.date) }}
+            </p>
+            <h3 class="text-xl font-semibold">
+              <NuxtLink
+                :to="toBlogPath(post.path)"
+                class="hover:underline"
+              >
+                {{ post.title }}
+              </NuxtLink>
+            </h3>
+            <p class="text-sm text-toned">
+              {{ post.description }}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <UBadge
+                v-for="tag in post.tags || []"
+                :key="`${post.id}-${tag}`"
+                variant="subtle"
+                color="neutral"
+              >
+                {{ tag }}
+              </UBadge>
+            </div>
+          </div>
+        </UCard>
+      </div>
     </UPageSection>
-  </div>
+  </UContainer>
 </template>
