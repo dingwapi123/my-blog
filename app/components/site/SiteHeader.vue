@@ -1,43 +1,41 @@
 <template>
-  <UHeader>
-    <template #left>
+  <UHeader class="site-header">
+    <div class="site-header-inner">
       <NuxtLink
         to="/"
-        class="text-base font-semibold tracking-wide"
+        class="site-brand"
       >
         辰心的博客
       </NuxtLink>
 
-      <nav class="hidden md:flex items-center gap-1">
-        <UButton
+      <nav class="site-nav">
+        <NuxtLink
           to="/"
-          color="neutral"
-          variant="ghost"
-          label="首页"
-        />
-        <UButton
+          class="site-nav-link"
+        >
+          首页
+        </NuxtLink>
+        <NuxtLink
           to="/blog"
-          color="neutral"
-          variant="ghost"
-          label="博客"
-        />
-        <UButton
+          class="site-nav-link"
+        >
+          博客
+        </NuxtLink>
+        <NuxtLink
           to="/tags"
-          color="neutral"
-          variant="ghost"
-          label="标签"
-        />
-        <UButton
+          class="site-nav-link"
+        >
+          标签
+        </NuxtLink>
+        <NuxtLink
           to="/about"
-          color="neutral"
-          variant="ghost"
-          label="关于"
-        />
+          class="site-nav-link"
+        >
+          关于
+        </NuxtLink>
       </nav>
-    </template>
 
-    <template #right>
       <ThemeToggle />
-    </template>
+    </div>
   </UHeader>
 </template>

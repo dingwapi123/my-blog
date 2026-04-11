@@ -13,33 +13,40 @@ const { data: posts } = await useAsyncData('blog-post-list', () =>
 </script>
 
 <template>
-  <UContainer class="py-10 sm:py-12">
-    <UPageHeader
-      title="全部文章"
-      description="这里收录了博客里所有公开文章，按发布时间倒序排列。"
-    />
+  <UContainer class="blog-list-page py-12 sm:py-16">
+    <header class="blog-list-header">
+      <p class="blog-list-kicker">
+        Archive
+      </p>
+      <h1 class="blog-list-title">
+        全部文章
+      </h1>
+      <p class="blog-list-description">
+        这里按发布时间倒序收录所有公开文章，持续更新，不断重写和打磨。
+      </p>
+    </header>
 
-    <div class="mt-8 grid gap-4">
-      <UCard
-        v-for="post in posts || []"
+    <div class="blog-list-lines">
+      <article
+        v-for="(post, index) in posts || []"
         :key="post.id"
+        class="blog-line-item"
+        :style="{ '--delay': `${index * 70}ms` }"
       >
-        <div class="space-y-3">
-          <p class="text-sm text-muted">
-            {{ formatDate(post.date) }}
-          </p>
-          <h2 class="text-2xl font-semibold">
-            <NuxtLink
-              :to="toBlogPath(post.path)"
-              class="hover:underline"
-            >
+        <p class="blog-line-date">
+          {{ formatDate(post.date) }}
+        </p>
+
+        <div class="blog-line-body">
+          <h2 class="blog-line-title">
+            <NuxtLink :to="toBlogPath(post.path)">
               {{ post.title }}
             </NuxtLink>
           </h2>
-          <p class="text-sm text-toned">
+          <p class="blog-line-description">
             {{ post.description }}
           </p>
-          <div class="flex flex-wrap gap-2">
+          <div class="blog-line-tags">
             <NuxtLink
               v-for="tag in post.tags || []"
               :key="`${post.id}-${tag}`"
@@ -53,17 +60,18 @@ const { data: posts } = await useAsyncData('blog-post-list', () =>
               </UBadge>
             </NuxtLink>
           </div>
-          <div>
-            <UButton
-              :to="toBlogPath(post.path)"
-              variant="ghost"
-              trailing-icon="i-lucide-arrow-right"
-            >
-              阅读全文
-            </UButton>
-          </div>
         </div>
-      </UCard>
+
+        <UButton
+          :to="toBlogPath(post.path)"
+          variant="ghost"
+          color="neutral"
+          trailing-icon="i-lucide-arrow-right"
+          class="blog-line-cta"
+        >
+          阅读
+        </UButton>
+      </article>
     </div>
   </UContainer>
 </template>

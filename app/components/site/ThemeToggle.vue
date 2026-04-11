@@ -1,36 +1,31 @@
 <script setup lang="ts">
 const { mode, setMode } = useTheme()
 
-const options = [
-  {
-    label: '浅色',
-    value: 'light',
-    icon: 'i-lucide-sun'
-  },
-  {
-    label: '深色',
-    value: 'dark',
-    icon: 'i-lucide-moon'
-  },
-  {
-    label: '跟随系统',
-    value: 'system',
-    icon: 'i-lucide-monitor'
-  }
-] as const
+const modeConfig = {
+  light: { label: '浅色', icon: 'i-lucide-sun' },
+  dark: { label: '深色', icon: 'i-lucide-moon' },
+  system: { label: '跟随', icon: 'i-lucide-monitor' }
+} as const
+
+const orderedModes = ['light', 'dark', 'system'] as const
+
+const current = computed(() => modeConfig[mode.value])
+
+function cycleTheme() {
+  const index = orderedModes.indexOf(mode.value)
+  const next = orderedModes[(index + 1) % orderedModes.length] || 'light'
+  setMode(next)
+}
 </script>
 
 <template>
-  <UButtonGroup size="sm">
-    <UButton
-      v-for="option in options"
-      :key="option.value"
-      :icon="option.icon"
-      :variant="mode === option.value ? 'solid' : 'ghost'"
-      color="neutral"
-      @click="setMode(option.value)"
-    >
-      {{ option.label }}
-    </UButton>
-  </UButtonGroup>
+  <UButton
+    color="neutral"
+    variant="outline"
+    class="theme-toggle-button"
+    :icon="current.icon"
+    @click="cycleTheme"
+  >
+    主题 {{ current.label }}
+  </UButton>
 </template>

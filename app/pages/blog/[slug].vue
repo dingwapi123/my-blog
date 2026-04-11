@@ -29,25 +29,36 @@ const { data: post } = await useAsyncData(`blog-post-${route.params.slug}`, asyn
 </script>
 
 <template>
-  <UContainer class="py-10 sm:py-12">
+  <UContainer class="article-page py-10 sm:py-14">
     <article
       v-if="post"
-      class="space-y-8"
+      class="article-wrap space-y-8"
     >
-      <header class="space-y-3">
-        <p class="text-sm text-muted">
+      <NuxtLink
+        to="/blog"
+        class="article-back"
+      >
+        <UIcon
+          name="i-lucide-arrow-left"
+          class="size-4"
+        />
+        返回文章列表
+      </NuxtLink>
+
+      <header class="article-header space-y-4">
+        <p class="article-meta">
           发布于 {{ formatDate(post.date) }}
           <span v-if="post.updated">
             · 更新于 {{ formatDate(post.updated) }}
           </span>
         </p>
-        <h1 class="text-3xl font-bold sm:text-4xl">
+        <h1 class="article-title">
           {{ post.title }}
         </h1>
-        <p class="text-base text-toned">
+        <p class="article-description">
           {{ post.description }}
         </p>
-        <div class="flex flex-wrap gap-2">
+        <div class="article-tags">
           <NuxtLink
             v-for="tag in post.tags || []"
             :key="`${post.id}-${tag}`"
@@ -65,7 +76,10 @@ const { data: post } = await useAsyncData(`blog-post-${route.params.slug}`, asyn
 
       <USeparator />
 
-      <ContentRenderer :value="post" />
+      <ContentRenderer
+        :value="post"
+        class="prose article-prose"
+      />
     </article>
   </UContainer>
 </template>
