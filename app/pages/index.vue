@@ -34,33 +34,65 @@ const { data: posts } = await useAsyncData('home-latest-posts', async () => {
     <section class="home-hero">
       <div class="hero-noise" />
       <UContainer class="hero-content">
-        <p class="hero-brand">
-          CHEN XIN ZHI
-        </p>
-        <h1 class="hero-title">
-          写代码，也记录每一次
-          <br>
-          真实的思考和选择。
-        </h1>
-        <p class="hero-subtitle">
-          这里是我的内容型实验室。主题聚焦前端工程、Nuxt 实践与长期写作方法。
-        </p>
-        <div class="hero-actions">
-          <UButton
-            to="/blog"
-            size="xl"
-            trailing-icon="i-lucide-arrow-right"
+        <div class="hero-main">
+          <p class="hero-brand">
+            CHEN XIN ZHI
+          </p>
+          <h1 class="hero-title">
+            写代码，也记录每一次
+            <br>
+            真实的思考和选择。
+          </h1>
+          <p class="hero-subtitle">
+            这里是我的内容型实验室。主题聚焦前端工程、Nuxt 实践与长期写作方法。
+          </p>
+          <div class="hero-actions">
+            <UButton
+              to="/blog"
+              size="xl"
+              trailing-icon="i-lucide-arrow-right"
+            >
+              浏览文章
+            </UButton>
+            <UButton
+              to="/about"
+              size="xl"
+              color="neutral"
+              variant="subtle"
+            >
+              了解我
+            </UButton>
+          </div>
+        </div>
+
+        <aside class="hero-aside">
+          <p class="hero-aside-kicker">
+            Site Notes
+          </p>
+          <ul class="hero-aside-list">
+            <li>方向：Nuxt / 前端工程 / 写作复盘</li>
+            <li>频率：每周至少 1 篇长期更新</li>
+            <li>目标：把经验沉淀成可复用知识</li>
+          </ul>
+          <NuxtLink
+            to="/tags"
+            class="hero-aside-link"
           >
-            浏览文章
-          </UButton>
-          <UButton
-            to="/about"
-            size="xl"
-            color="neutral"
-            variant="subtle"
-          >
-            了解我
-          </UButton>
+            先从标签开始浏览
+            <UIcon
+              name="i-lucide-arrow-right"
+              class="size-4"
+            />
+          </NuxtLink>
+        </aside>
+      </UContainer>
+    </section>
+
+    <section class="home-rhythm">
+      <UContainer>
+        <div class="rhythm-line">
+          <span class="rhythm-dot" />
+          <span class="rhythm-dot rhythm-dot-soft" />
         </div>
       </UContainer>
     </section>
