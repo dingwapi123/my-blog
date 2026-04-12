@@ -21,6 +21,7 @@ logs
 .agents
 .trae
 skills-lock.json
+stitch/
 
 # Local env files
 .env

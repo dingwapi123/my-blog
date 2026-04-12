@@ -1,14 +1,8 @@
 <script setup lang="ts">
+import { formatZhDate } from '~/utils/date'
+
 const route = useRoute()
 const slug = String(route.params.slug || '')
-
-const formatDate = (value?: string) => {
-  if (!value) {
-    return ''
-  }
-
-  return new Intl.DateTimeFormat('zh-CN', { dateStyle: 'long' }).format(new Date(value))
-}
 
 const { data: post } = await useAsyncData(`blog-post-${route.params.slug}`, async () => {
   const items = await queryCollection('posts')
@@ -47,9 +41,9 @@ const { data: post } = await useAsyncData(`blog-post-${route.params.slug}`, asyn
 
       <header class="article-header space-y-4">
         <p class="article-meta">
-          发布于 {{ formatDate(post.date) }}
+          发布于 {{ formatZhDate(post.date) }}
           <span v-if="post.updated">
-            · 更新于 {{ formatDate(post.updated) }}
+            · 更新于 {{ formatZhDate(post.updated) }}
           </span>
         </p>
         <h1 class="article-title">

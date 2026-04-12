@@ -205,7 +205,7 @@ a:hover {
 }
 
 .site-nav-link:hover,
-.site-nav-link.router-link-active {
+.site-nav-link.router-link-exact-active {
   color: var(--theme-text);
   background: color-mix(in oklab, var(--theme-surface) 84%, transparent);
 }
@@ -232,7 +232,7 @@ a:hover {
 }
 
 .site-nav-mobile-link:hover,
-.site-nav-mobile-link.router-link-active {
+.site-nav-mobile-link.router-link-exact-active {
   color: var(--theme-text);
   background: color-mix(in oklab, var(--theme-surface) 84%, transparent);
 }
@@ -476,6 +476,19 @@ a:hover {
   background: color-mix(in oklab, var(--theme-surface) 36%, transparent);
   border-radius: 0.85rem;
   padding-inline: 1rem;
+}
+
+.latest-empty {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1rem 0.25rem;
+  color: var(--theme-text-muted);
+}
+
+.latest-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
 }
 
 .latest-item,

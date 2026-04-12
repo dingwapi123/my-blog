@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat('zh-CN', { dateStyle: 'long' }).format(new Date(value))
+import { formatZhDate } from '~/utils/date'
 
 const toBlogPath = (path: string) => `/blog/${path.split('/').filter(Boolean).at(-1)}`
 
@@ -34,7 +33,7 @@ const { data: posts } = await useAsyncData('blog-post-list', () =>
         :style="{ '--delay': `${index * 70}ms` }"
       >
         <p class="blog-line-date">
-          {{ formatDate(post.date) }}
+          {{ formatZhDate(post.date) }}
         </p>
 
         <div class="blog-line-body">

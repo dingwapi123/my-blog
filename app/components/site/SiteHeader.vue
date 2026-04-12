@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import ThemeToggle from './ThemeToggle.vue'
+
+const navItems = useNavigation()
 </script>
 
 <template>
@@ -15,28 +17,12 @@ import ThemeToggle from './ThemeToggle.vue'
 
     <nav class="site-nav">
       <NuxtLink
-        to="/"
+        v-for="item in navItems"
+        :key="item.to"
+        :to="item.to"
         class="site-nav-link"
       >
-        首页
-      </NuxtLink>
-      <NuxtLink
-        to="/blog"
-        class="site-nav-link"
-      >
-        博客
-      </NuxtLink>
-      <NuxtLink
-        to="/tags"
-        class="site-nav-link"
-      >
-        标签
-      </NuxtLink>
-      <NuxtLink
-        to="/about"
-        class="site-nav-link"
-      >
-        关于
+        {{ item.label }}
       </NuxtLink>
     </nav>
 
@@ -49,28 +35,12 @@ import ThemeToggle from './ThemeToggle.vue'
     <template #body>
       <nav class="site-nav-mobile">
         <NuxtLink
-          to="/"
+          v-for="item in navItems"
+          :key="item.to"
+          :to="item.to"
           class="site-nav-mobile-link"
         >
-          首页
-        </NuxtLink>
-        <NuxtLink
-          to="/blog"
-          class="site-nav-mobile-link"
-        >
-          博客
-        </NuxtLink>
-        <NuxtLink
-          to="/tags"
-          class="site-nav-mobile-link"
-        >
-          标签
-        </NuxtLink>
-        <NuxtLink
-          to="/about"
-          class="site-nav-mobile-link"
-        >
-          关于
+          {{ item.label }}
         </NuxtLink>
       </nav>
     </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat('zh-CN', { dateStyle: 'long' }).format(new Date(value))
+import { formatZhDate } from '~/utils/date'
 
 const toBlogPath = (path: string) => `/blog/${path.split('/').filter(Boolean).at(-1)}`
 
@@ -75,10 +74,10 @@ const { data: posts } = await useAsyncData('home-latest-posts', async () => {
             <li>目标：把经验沉淀成可复用知识</li>
           </ul>
           <NuxtLink
-            to="/tags"
+            to="/projects"
             class="hero-aside-link"
           >
-            先从标签开始浏览
+            看看正在做的项目
             <UIcon
               name="i-lucide-arrow-right"
               class="size-4"
@@ -150,7 +149,7 @@ const { data: posts } = await useAsyncData('home-latest-posts', async () => {
             :style="{ '--delay': `${index * 90}ms` }"
           >
             <p class="latest-date">
-              {{ formatDate(post.date) }}
+              {{ formatZhDate(post.date) }}
             </p>
             <div class="latest-main">
               <h3 class="latest-title">
@@ -177,6 +176,29 @@ const { data: posts } = await useAsyncData('home-latest-posts', async () => {
               </div>
             </div>
           </article>
+        </div>
+
+        <div
+          v-if="!posts?.length"
+          class="latest-empty"
+        >
+          <p>文章整理中，先去看看我的项目或关于页。</p>
+          <div class="latest-empty-actions">
+            <UButton
+              to="/projects"
+              color="neutral"
+              variant="outline"
+            >
+              浏览项目
+            </UButton>
+            <UButton
+              to="/about"
+              color="neutral"
+              variant="ghost"
+            >
+              了解我
+            </UButton>
+          </div>
         </div>
       </UContainer>
     </section>

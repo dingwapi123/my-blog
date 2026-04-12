@@ -29,11 +29,18 @@
         去看文章
       </UButton>
       <UButton
-        to="/tags"
+        to="/projects"
+        color="neutral"
+        variant="soft"
+      >
+        查看项目
+      </UButton>
+      <UButton
+        to="/snippets"
         color="neutral"
         variant="outline"
       >
-        浏览标签
+        浏览片段
       </UButton>
     </div>
   </UContainer>
